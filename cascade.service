@@ -1,0 +1,35 @@
+[Unit]
+Description=Cascade HTTP/HTTPS Caching Proxy
+Documentation=https://github.com/amirmatini/cascade
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cascade
+Group=cascade
+ExecStart=/usr/local/bin/cascade -config /etc/cascade/config.yaml
+ExecReload=/bin/kill -HUP $MAINPID
+Restart=on-failure
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/cache/cascade
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictNamespaces=true
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=512
+
+[Install]
+WantedBy=multi-user.target
+

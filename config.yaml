@@ -1,0 +1,43 @@
+server:
+  host: "0.0.0.0"
+  port: 3142
+
+cache:
+  directory: "./cache"
+  max_size_gb: 50
+  min_file_size_kb: 1
+  max_file_size_mb: 10240
+  default_ttl: 24h
+  buffer_size_kb: 64
+  respect_headers: true
+
+egress:
+  enabled: false
+  proxy_type: "http"
+  proxy_url: ""
+
+rules:
+  passthrough:
+    - "*login*"
+    - "*auth*"
+    - "*.cgi"
+  
+  https_passthrough:
+    - "download.docker.com"
+    - "mariadb.com"
+    - "*.mariadb.com"
+    - "mariadb.org"
+    - "*.mariadb.org"
+    - "storage.googleapis.com"
+    - "ppa.launchpadcontent.net"
+ 
+  special_ttl:
+    "*InRelease*": "5m"
+    "*Release.gpg*": "5m"
+    "*/Release": "30m"
+    "*/Packages*": "1h"
+    "*/Sources*": "1h"
+    "*.deb": "720h"
+    "*.rpm": "720h"
+    "*.tar.gz": "168h"
+
