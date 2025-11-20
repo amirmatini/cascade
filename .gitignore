@@ -1,0 +1,35 @@
+# Binaries
+build/
+/cascade
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories
+vendor/
+
+# Cache directory
+/cache/
+/var/cache/cascade/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config overrides
+config.local.yaml
+
